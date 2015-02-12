@@ -1,0 +1,70 @@
+.navbar-inverse .navbar-inner {
+	background-color: #357EC7;
+	background-image: linear-gradient(to bottom, #357EC7, #357EC7);
+	background-repeat: repeat-x;
+	border-color: #357EC7;
+}
+
+.navbar-inverse .brand, .navbar-inverse .nav > li > a {
+color: white;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+font-size: large;
+}
+
+.nav-list > li > a {
+padding: 10px 20px;
+font-size: 20px;
+}
+
+.navbar-inverse .navbar-text {
+color: white;
+font-size: 20px;
+}
+.navbar-inverse .navbar-link {
+color: white;
+}
+
+.centered {
+	position: fixed; /* or absolute */
+	top: 50%;
+	left: 50%;
+	margin-top: -300px;
+	margin-left: -210px;
+	width: 30%;
+	height: 65%;
+}
+
+.form-signin {
+	background-color: #fff;
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 7px;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+.form-signin-legend {
+	margin-left: 10px;
+}
+
+.bodyCss {
+	background: #357EC7 url(../img/bookStack1.png) no-repeat left 80px;
+}
+
+.legendLogin {
+	margin-left: 80px;
+}
+.navbar-inverse .brand {
+color: white;
+}
+
+.row-fluid {
+margin-top: 28px;
+}
+.nav-header{
+	font-size: 22px;
+	font-weight: bolder;
+	color: black;
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd   
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<global-method-security pre-post-annotations="enabled">
+		<!-- AspectJ pointcut expression that locates our "post" method and applies 
+			security that way <protect-pointcut expression="execution(* bigbank.*Service.post*(..))" 
+			access="ROLE_TELLER"/> -->
+	</global-method-security>
+
+	<http use-expressions="true" auto-config="true"
+		access-denied-page="/login">
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/logout" access="permitAll" />
+		<intercept-url pattern="/**/images/**" access="permitAll" />
+		<intercept-url pattern="/**/img/**" access="permitAll" />
+		<intercept-url pattern="/**/css/**" access="permitAll" />
+		<intercept-url pattern="/**/js/**" access="permitAll"/>
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<!-- this temp....this means everything else....change this to permitAll -->
+		<!-- Disable web URI authorization, as we're using <global-method-security> 
+			and have @Secured the services layer instead <intercept-url pattern="/listAccounts.html" 
+			access="isRememberMe()" /> <intercept-url pattern="/post.html" access="hasRole('ROLE_TELLER')" 
+			/> -->
+		<form-login login-page="/login" authentication-failure-url="/login?error=true"
+			authentication-success-handler-ref="CustomSimpleUrlAuthenticationSuccessHandler" />
+		<logout invalidate-session="true" />
+
+		<session-management>
+			<concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="true" />
+		</session-management>
+	</http>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="bookUserDetailsService" />
+
+	</authentication-manager>
+	<beans:bean id="bookUserDetailsService"
+		class="com.bookstore.service.BookUserDetailsService" />
+
+	<beans:bean id="CustomSimpleUrlAuthenticationSuccessHandler"
+		class="com.bookstore.security.CustomSimpleUrlAuthenticationSuccessHandler">
+	</beans:bean>
+
+</beans:beans>
